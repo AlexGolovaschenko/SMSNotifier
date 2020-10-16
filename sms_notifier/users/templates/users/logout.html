@@ -1,0 +1,12 @@
+{% extends 'parts/base.html' %}
+{% block title %} - Выход {% endblock %}
+
+
+{% block content %} 
+<div class="container w-25 mt-3 pb-3 shadow-sm border bg-light">
+	<h4>Вы вышли из учетной записи</h4>
+	<div class="border-top pt-3">
+		<small class="text-muted"><a href="{% url 'users:login' %}">Войти снова</a> </small>
+	</div>
+</div>
+{% endblock %}

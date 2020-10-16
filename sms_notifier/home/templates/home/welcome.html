@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="container mt-3 shadow-sm border bg-white" style="min-height: 90vh">
+
+	<h3 class="text-center p-3">ОВЕН для Животноводства <br> Сервис SMS-оповещения <b>SMS-Notifier</b></h3>	
+	<img class="mx-auto d-block m-3" src="{% static 'home/img/welcome.jpg' %}">
+
+	<div class="container"> 
+		<p class="text-center">
+			<a href="{% url 'users:login' %}">Войдите</a> или <a href="{% url 'users:register' %}">Зарегистрируйтесь</a> <br>
+			чтобы продолжить работу с сервисом
+		</p>
+	</div>
+
+</div>
