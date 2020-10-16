@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party
+    'phonenumber_field',
     # inner
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+    'notifier.apps.NotifierConfig',
+    'owencloud_connector.apps.OwencloudConnectorConfig',
 ]
 
 MIDDLEWARE = [
