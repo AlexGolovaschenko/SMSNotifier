@@ -9,4 +9,5 @@ urlpatterns = [
     path('settings/', settings, name='settings'),
     path('admin/', admin.site.urls),
     path('user/', include('users.urls')),
+    path('connector/', include('owencloud_connector.urls'))
 ]

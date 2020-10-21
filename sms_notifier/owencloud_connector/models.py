@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+CLOUD_DOMAIN_RU = 'RU'
+CLOUD_DOMAIN_UA = 'UA'
 CLOUD_DOMAINS = {
-	('RU', 'RU'), 
-	('UA', 'UA'),
+	(CLOUD_DOMAIN_RU, 'RU'), 
+	(CLOUD_DOMAIN_UA, 'UA'),
 }
 
 class CloudConnector(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	domain = models.CharField(max_length=2, choices=CLOUD_DOMAINS, default='RU')
+	domain = models.CharField(max_length=2, choices=CLOUD_DOMAINS, default=CLOUD_DOMAIN_RU)
 	token = models.CharField(max_length=200, blank=False, null=False)
 
 	def __str__(self):

@@ -64,47 +64,7 @@
     </div>
 
     <div class="bg-white p-3 shadow-sm mt-3">
-      <h3> Параметры подключения к OwenCloud </h3>
-      <table class="table table-borderless table-sm w-50">
-        <tr>
-          <td>Токен:  </td>
-          <td> sdflgjhdljkfglijlkj </td>
-        </tr>
-      </table>
-
-      <table class="table table-striped table-hover table-sm">
-        <thead>
-          <tr>
-            <th> Код аварии </th>
-            <th> Код тега OwenCloud </th>
-            <th> Описание </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> Alarm1 </td>
-            <td> AlarmTR </td>
-            <td> Неисправность датчика темпертуры в помещении </td>
-          </tr>
-          <tr>
-            <td> Alarm2 </td>
-            <td> AlarmTH </td>
-            <td> Неисправность датчика влажности </td>
-          </tr>
-          <tr>
-            <td> Alarm3 </td>
-            <td> AlarmTY </td>
-            <td> Неисправность вентиляторов </td>
-          </tr>
-          <tr>
-            <td> Alarm4 </td>
-            <td> AlarmTZ1 </td>
-            <td> Высокая температура в помещении </td>
-          </tr>        
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-secondary">Добавить</button>
-      <button type="button" class="btn btn-success">Сохранить</button>      
+       {% include 'owencloud_connector/settings.html' with events=cloud_events connector=connector %}  
     </div>
 </div>
 {% endblock %}

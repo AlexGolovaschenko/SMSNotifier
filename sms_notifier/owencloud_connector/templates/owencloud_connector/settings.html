@@ -1,0 +1,11 @@
+<h3> Параметры подключения к OwenCloud </h3>
+<table class="table table-borderless table-sm w-50">
+<tr>
+  <td>Токен:  </td>
+  <td> {{connector.token}} </td>
+</tr>
+</table>
+
+{% include 'owencloud_connector/events_list.html' with events=events only %}
+<a type="button" class="btn btn-secondary" href="{% url 'connector:update-events' %}?next=settings"><i class='fas fa-redo-alt'></i> Обновить</a>
+<button type="button" class="btn btn-success">Сохранить</button>      

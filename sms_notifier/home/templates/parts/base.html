@@ -15,13 +15,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <!-- Font Awsom 5 -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
   <!-- styles -->
-  <link rel="stylesheet" href="{% static 'web/style/style.css' %}">
+  <link rel="stylesheet" href="{% static 'home/styles/style.css' %}">
 
 </head>
-<body style="background-image: url('{% static 'home/img/background.jpg' %}');">
+<body style="background: url('{% static 'home/img/grid.png' %}') repeat-x; background-attachment: fixed;">
   {% include 'parts/header.html' %}
+
+    {% if messages %} 
+      {% for message in messages %}
+        <div class="container my-3 alert alert-{{message.tags}}">
+          {{message }}
+        </div>
+      {% endfor %}
+    {% endif %}
 
 	{% block content %}
 	    <h1>  Base.html </h1>
