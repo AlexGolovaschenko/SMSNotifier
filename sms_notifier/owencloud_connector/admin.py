@@ -6,7 +6,7 @@ from .models import CloudConnector, CloudEvent
 class CloudEventInline(admin.TabularInline):
     model = CloudEvent
     can_delete = False
-    readonly_fields = ('event_id', 'device_id', 'event_description', 'link')
+    readonly_fields = ('event_id', 'device_id', 'event_description', 'is_active', 'link')
     extra = 0
 
     def link(self, instance):

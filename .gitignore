@@ -6,6 +6,11 @@ git commands.txt
 local_settings.json
 OwenCloud API.pdf
 
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+sms_ru_example/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

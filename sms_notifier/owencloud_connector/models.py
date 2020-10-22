@@ -26,6 +26,7 @@ class CloudEvent(models.Model):
 	event_id = models.CharField(max_length=200, verbose_name='Id события в OwenCloud')
 	device_id = models.CharField(max_length=200, verbose_name='Id устройства')	
 	event_description = models.CharField(max_length=200, verbose_name='Описание события') 
+	is_active = models.BooleanField(verbose_name='Активно', default=False)
 
 	def __str__(self):
 		return self.event_description

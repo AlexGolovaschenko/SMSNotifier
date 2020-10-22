@@ -14,7 +14,7 @@ def update_events_list(request):
     cloud_token = cloud_connector.token
     cloud_domain = cloud_connector.domain
     connector = OwenCloudConnector(debug = False, token = cloud_token, user_domain=cloud_domain)
-    # read devices list
+    # read events list
     events_list = connector.getEventsList()
     
     # update or create events

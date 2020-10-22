@@ -109,7 +109,7 @@ class OwenCloudConnector():
         return responce['data']
 
 
-    def getEventsList(self):
+    def getEventsList(self, just_active=False):
         '''
         Получение списка событий компании - POST event/list
         return list of setted events on all objects for current user 
