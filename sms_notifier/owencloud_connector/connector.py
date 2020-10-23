@@ -114,22 +114,27 @@ class OwenCloudConnector():
         Получение списка событий компании - POST event/list
         return list of setted events on all objects for current user 
         '''
-        # url = self._get_url('facility-event/list')   
-        url = self._get_url('event/list')   
+        url_1 = self._get_url('facility-event/list')    # facility events
+        url_2 = self._get_url('event/list')             # devices events
         headers = self._get_autorization_header()
-        responce = self._request('POST', url, headers)
+        responce_1 = self._request('POST', url_1, headers)
+        responce_2 = self._request('POST', url_2, headers)
         
-        status = responce['status']
-        if status in ('200', '201'):
+        status_1 = responce_1['status']
+        status_2 = responce_2['status']
+        if (status_1 in ('200', '201')) or (status_2 in ('200', '201')):
             events = []
-            for event in responce['data']:
+            for event in responce_1['data']:
                 events.append( str(event['id']) )
+            for event in responce_2['data']:
+                events.append( str(event['id']) )    
             print('SUCCESS: Events List received: ' + str(events))
         else:
             print('ERROR: Events List was not received. Status %s' %(status))
             printJson(responce['data'])
 
-        return responce['data']
+        events_list = responce_1['data'] + responce_2['data']
+        return events_list
 
 
     def _get_url(self, path):

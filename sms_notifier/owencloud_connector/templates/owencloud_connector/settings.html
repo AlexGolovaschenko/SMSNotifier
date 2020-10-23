@@ -7,5 +7,4 @@
 </table>
 
 {% include 'owencloud_connector/events_list.html' with events=events only %}
-<a type="button" class="btn btn-secondary" href="{% url 'connector:update-events' %}?next=settings"><i class='fas fa-redo-alt'></i> Обновить</a>
-<button type="button" class="btn btn-success">Сохранить</button>      
+<a type="button" class="btn btn-success" href="{% url 'connector:update-events' %}?next=settings"><i class='fas fa-redo-alt'></i> Обновить</a>

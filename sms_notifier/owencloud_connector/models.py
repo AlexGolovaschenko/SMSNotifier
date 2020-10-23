@@ -29,7 +29,7 @@ class CloudEvent(models.Model):
 	is_active = models.BooleanField(verbose_name='Активно', default=False)
 
 	def __str__(self):
-		return self.event_description
+		return str(self.id) + ': ' + str(self.event_description)
 
 	class Meta:
 		verbose_name = 'Событие OwenCloud'

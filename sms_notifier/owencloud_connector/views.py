@@ -9,6 +9,7 @@ from .connector import OwenCloudConnector
 
 @login_required
 def update_events_list(request):
+    message = ''
     user = request.user
     cloud_connector = CloudConnector.objects.get(user = user)
     cloud_token = cloud_connector.token
@@ -22,16 +23,29 @@ def update_events_list(request):
         if CloudEvent.objects.filter(cloud_connector = cloud_connector, event_id = event['id']).exists():
             obj = CloudEvent.objects.get(cloud_connector = cloud_connector, event_id = event['id'])
             obj.event_id = event['id']
-            obj.device_id = 1,
+            obj.device_id = event.get("device_id", 1),
             obj.event_description = event['message']
         else:
             CloudEvent.objects.create(
                 cloud_connector = cloud_connector, 
                 event_id = event['id'], 
-                device_id = 1,
+                device_id = event.get("device_id", 1),
                 event_description = event['message'] )
+            message += '<br/>Событие OwenCloud id="%s" было добавлено' %(event['id'])
 
-    messages.success(request, f'Список событий OwenCloud успешно обновлен.')
+    # clear not existing events
+    ev_ids = []
+    for event in events_list:
+        ev_ids.append(str(event['id']))
+    all_obj = CloudEvent.objects.filter(cloud_connector = cloud_connector)
+    for obj in all_obj:
+        if str(obj.event_id) not in ev_ids:
+            print('Cloud event %s has been removed' %(obj.event_id))
+            message += '<br/>Событие OwenCloud id="%s" было удалено' %(obj.event_id)
+            obj.delete()
+
+
+    messages.success(request, f'<b>Список событий OwenCloud успешно обновлен.</b>' + message)
     redirect_path = request.GET.get('next')
     if redirect_path:
         return redirect(redirect_path)

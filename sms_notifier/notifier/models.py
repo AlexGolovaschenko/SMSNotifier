@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 from datetime import time
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+from owencloud_connector.models import CloudEvent
 
 SMS_SERVICES = {
-	('SMS_1', 'SMS service 1 (test)'),
+	('SMS.RU', 'SMS.RU'),
 }
 
 
@@ -15,12 +17,25 @@ class Notifier(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	sms_service = models.CharField(max_length=20, blank=False, null=False, choices=SMS_SERVICES, verbose_name='Сервис рассылки СМС')
 
+	def __str__(self):
+		return str(self.user.username) + ' уведомления'
+
+	class Meta:
+		verbose_name = 'Уведомление'
+		verbose_name_plural = 'Уведомления'
+
+
 
 class Event(models.Model):
 	notifier = models.ForeignKey(Notifier, on_delete = models.CASCADE)
+	cloud_event_id = models.ForeignKey(CloudEvent, null=True, on_delete = models.SET_NULL, verbose_name='Id события OwenCloud')
 	description = models.CharField(max_length=200, verbose_name='Описание события')
-	activate_registration = models.BooleanField(default=False, verbose_name='Включить регистрацию')
+	activate_registration = models.BooleanField(default=True, verbose_name='Включить регистрацию')
 	activate_notification = models.BooleanField(default=False, verbose_name='Включить оповещение')
+
+	class Meta:
+		verbose_name = 'Событие'
+		verbose_name_plural = 'События'
 
 
 class Recipient(models.Model):
@@ -35,7 +50,7 @@ class Recipient(models.Model):
 class EventRecord(models.Model):
 	event = models.ForeignKey(Event, on_delete = models.CASCADE)
 	raise_dt = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Начало события')
-	fall_dt = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Завершение события')
+	fall_dt = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, verbose_name='Завершение события')
 
 	processing = models.BooleanField(default=False, verbose_name='В обработке')
 	done = models.BooleanField(default=False, verbose_name='Обработано')
